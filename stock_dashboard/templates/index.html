@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header class="header">
+        <h1>Stock Dashboard</h1>
+        <button id="themeToggle">🌙</button>
+    </header>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Companies</h2>
+            </div>
+            <ul id="companyList"></ul>
+        </aside>
+        <main class="main">
+            <div class="chart-container">
+                <h3 id="chartTitle">Select a company</h3>
+                <canvas id="stockChart"></canvas>
+            </div>
+        </main>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
