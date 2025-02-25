@@ -39,8 +39,14 @@ document.addEventListener("DOMContentLoaded", function () {
     // Function to get theme colors
     function getChartColors(theme) {
         return theme === "dark"
-            ? { text: "#fff", line: "#ffcc00", point: "#ffcc00", bg: "rgba(255, 204, 0, 0.1)" }
-            : { text: "#000", line: "#0000FF", point: "#0000FF", bg: "rgba(0, 0, 255, 0.1)" };
+            ? { text: "#fff", 
+                opening : { line: "#ffcc00", point: "#ffcc00", bg: "rgba(255, 204, 0, 0.1)" },
+                closing : { line: "#ff0000", point: "#ff0000", bg: "rgba(255, 0, 0, 0.1)"}
+            }
+            : { text: "#000", 
+                opening : {line: "#0000FF", point: "#0000FF", bg: "rgba(0, 0, 255, 0.1)" },
+                closing : { line: "#00FF00", point: "#00FF00", bg: "rgba(255, 0, 255, 0.1)" }
+            };
     }
 
     let chartColors = getChartColors(currentTheme);
@@ -49,16 +55,28 @@ document.addEventListener("DOMContentLoaded", function () {
         type: "line",
         data: {
             labels: [],
-            datasets: [{
-                label: "Closing Price",
+            datasets: [
+            {
+                label: "Opening Price",
                 data: [],
-                borderColor: chartColors.line,
-                backgroundColor: chartColors.bg,
+                borderColor: chartColors.opening.line,
+                backgroundColor: chartColors.opening.bg,
                 borderWidth: 2,
                 pointRadius: 4,
-                pointBackgroundColor: chartColors.point,
+                pointBackgroundColor: chartColors.opening.point,
                 tension: 0.3
-            }]
+            },
+            {
+                label: "Closing Price",
+                data: [],
+                borderColor: chartColors.closing.line,
+                backgroundColor: chartColors.closing.bg,
+                borderWidth: 2,
+                pointRadius: 4,
+                pointBackgroundColor: chartColors.closing.point,
+                tension: 0.3
+            },
+        ]
         },
         options: {
             responsive: true,
@@ -76,9 +94,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function updateChartTheme(theme) {
         let colors = getChartColors(theme);
-        stockChart.data.datasets[0].borderColor = colors.line;
-        stockChart.data.datasets[0].backgroundColor = colors.bg;
-        stockChart.data.datasets[0].pointBackgroundColor = colors.point;
+        stockChart.data.datasets[0].borderColor = colors.opening.line;
+        stockChart.data.datasets[0].backgroundColor = colors.opening.bg;
+        stockChart.data.datasets[0].pointBackgroundColor = colors.opening.point;
+        stockChart.data.datasets[1].borderColor = colors.closing.line;
+        stockChart.data.datasets[1].backgroundColor = colors.closing.bg;
+        stockChart.data.datasets[1].pointBackgroundColor = colors.closing.point;
         stockChart.options.plugins.legend.labels.color = colors.text;
         stockChart.options.plugins.title.color = colors.text;
         stockChart.options.scales.x.ticks.color = colors.text;
@@ -89,7 +110,8 @@ document.addEventListener("DOMContentLoaded", function () {
     function updateChart(data, company) {
         document.getElementById("chartTitle").textContent = company;
         stockChart.data.labels = data.map(entry => entry.index_date);
-        stockChart.data.datasets[0].data = data.map(entry => entry.closing_index_value);
+        stockChart.data.datasets[0].data = data.map(entry => entry.open_index_value);
+        stockChart.data.datasets[1].data = data.map(entry => entry.closing_index_value);
         stockChart.update();
     }
 });

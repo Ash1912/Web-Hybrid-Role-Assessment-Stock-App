@@ -19,7 +19,7 @@ def get_companies():
 
 @app.route('/data/<company>')
 def get_company_data(company):
-    company_data = df[df['index_name'] == company][['index_date', 'closing_index_value']]
+    company_data = df[df['index_name'] == company][['index_date', 'open_index_value', 'closing_index_value']]
     company_data = company_data.sort_values('index_date')
     return jsonify(company_data.to_dict(orient='records'))
 
