@@ -38,7 +38,7 @@ A Stock Dashboard web application that provides interactive stock price visualiz
 1️⃣ **Clone the Repository**
 
 ```bash
-git clone https://github.com/your-username/stock_dashboard.git
+git clone https://github.com/Ash1912/Web-Hybrid-Role-Assessment-Stock-App.git
 cd stock_dashboard
 ```
 
