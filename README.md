@@ -69,7 +69,13 @@ The app will start at http://127.0.0.1:5000/.
 
 🔹 Light Theme
 
+![image](https://github.com/user-attachments/assets/640912d0-d4e7-48b5-9037-1aadc8468bf2)
+
+
 🔹 Dark Theme
+
+![image](https://github.com/user-attachments/assets/38f73e4f-b06b-430e-9b5b-f6734abb4fa7)
+
 
 ## 📜 License
 
